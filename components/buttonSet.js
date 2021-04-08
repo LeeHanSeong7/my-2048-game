@@ -22,7 +22,6 @@ export function readyButtonSet(){
     buttonSet.setAttribute("id", "buttonSet");
     container.appendChild(buttonSet);
     updateButtonSetStyle();
-    updateButtonSet([restartButton,backButton]);
 }
 
 //buttonlist
@@ -45,7 +44,8 @@ const defaultStyle=`
     text-align: center;
     line-height: ${buttonSetHeight-2*tb_margin}px;
 `;
-function updateButtonSet(buttonList){
+
+export function updateButtonSet(buttonList){
     buttonList.forEach(item=>{
         let element=document.createElement("div");
         element.setAttribute('style', defaultStyle);
@@ -53,18 +53,4 @@ function updateButtonSet(buttonList){
         element.innerText=item["text"];
         buttonSet.appendChild(element);
     });
-}
-let restartButton = {
-    "onPress": restartOnclick,
-    "text":"restart",
-};
-let backButton = {
-    "onPress": backOnclick,
-    "text":"back",
-};
-
-//eventListener
-function restartOnclick(){
-}
-function backOnclick(){
 }

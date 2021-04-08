@@ -1,5 +1,8 @@
-import {buttonSetHeight} from "./buttonSet.js"
 let boardElement;
+//config
+const tileMargin = 0.05; //%
+
+//
 export function updateBoardStyle(){
     let style=`
         flex:1;
@@ -12,6 +15,10 @@ export function updateBoardStyle(){
         flex:1;
         max-height: ${document.getElementById("container").offsetWidth};
         width:${document.getElementById("board").offsetHeight};
+        
+        display: flex; 
+        flex-direction: column;
+        flex-wrap: wrap;
     `;
     boardElement.setAttribute(`style`,style);
 }
@@ -21,3 +28,33 @@ export function readyBoard(){
     container.appendChild(boardElement);
     updateBoardStyle();
 }
+export function drawTiles(tiles,size){
+    while (boardElement.firstChild) {
+        boardElement.removeChild(boardElement.firstChild);
+    }
+    let tileStyle=`
+        width: ${(100/size)*(1-tileMargin*2)}%;
+        height: ${(100/size)*(1-tileMargin*2)}%;
+        margin: ${(100/size)*tileMargin}%;
+    `;
+    tiles.forEach(tile=>{
+        const element = document.createElement("div");
+        if(tile != 0){
+            tileStyle += `
+                background-color: rgba(${255*((11-tile)/11)},${155*((11-tile)/11)},${0},1);
+                font-size: 50px;
+                text-align: center;
+                `;
+            element.innerText=2**tile;
+        }
+        else{
+            tileStyle += `
+                background-color: gray;
+                `;
+        }
+        element.setAttribute('class', 'tile');
+        element.setAttribute('style', tileStyle);
+        boardElement.appendChild(element);
+    });
+}
+//
