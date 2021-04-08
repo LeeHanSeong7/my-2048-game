@@ -1,0 +1,21 @@
+.board{
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    
+}
+.temp{
+    background-color: chartreuse;
+    flex:1;
+    max-width:fit-content;
+    margin: 5px;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-bottom: ;
+    border-radius: 3px;
+    border: solid 0px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 10em;
+}

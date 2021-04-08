@@ -1,0 +1,35 @@
+<html style>
+    <head>
+        <style>
+            h1{
+                text-align: center;
+            }
+            body{
+                margin: 0;
+                padding: 0;
+                height:100vh; width: 100vw; 
+                display: flex; 
+                align-content: stretch;
+                flex-direction: column;
+            }
+            #container{
+                background-color: blueviolet;
+                flex:1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column-reverse;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <!-- <h1 style="text-align: center;">2048</h1>
+        <h3 style="text-align: right;">knu 2016115743 이한성</h3> -->
+        <div id="container"></div>
+    </body>
+    </script>
+    <script type="module" src="./components/board.js"></script>
+    <script type="module" src="./components/buttonSet.js"></script>
+    <script type="module" src="./gameEngine.js"></script>
+</html>
