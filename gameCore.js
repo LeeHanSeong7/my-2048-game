@@ -179,6 +179,8 @@ buttonSet.readyButtonSet();
 buttonSet.updateButtonSet([restartButton,backButton]);
 board.readyBoard();
 board.boardElement.addEventListener("mousedown",onMouseDown,false);
+board.boardElement.addEventListener("touchstart",onMouseDown,false);
 document.getElementsByTagName("body")[0].addEventListener("mouseup",onMouseUp,false);
+document.getElementsByTagName("body")[0].addEventListener("touchend",onMouseUp,false);
   
 setGame(boardWidth);
