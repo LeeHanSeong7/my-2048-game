@@ -1,4 +1,4 @@
-let boardElement;
+export let boardElement;
 //config
 const tileMargin = 0.05; //%
 
@@ -41,9 +41,8 @@ export function drawTiles(tiles,size){
         const element = document.createElement("div");
         if(tile != 0){
             tileStyle += `
-                background-color: rgba(${255*((11-tile)/11)},${155*((11-tile)/11)},${0},1);
-                font-size: 50px;
-                text-align: center;
+                background-color: rgba(${255*((12-tile)/11)},${155*((12-tile)/11)},${0},1);
+                font-size: larger;
                 `;
             element.innerText=2**tile;
         }
@@ -52,7 +51,7 @@ export function drawTiles(tiles,size){
                 background-color: gray;
                 `;
         }
-        element.setAttribute('class', 'tile');
+        element.setAttribute('class', 'tile no_select');
         element.setAttribute('style', tileStyle);
         boardElement.appendChild(element);
     });

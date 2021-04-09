@@ -49,6 +49,7 @@ export function updateButtonSet(buttonList){
     buttonList.forEach(item=>{
         let element=document.createElement("div");
         element.setAttribute('style', defaultStyle);
+        element.setAttribute('class', "no_select");
         element.addEventListener('click',item["onPress"]);
         element.innerText=item["text"];
         buttonSet.appendChild(element);
