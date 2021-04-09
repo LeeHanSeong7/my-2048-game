@@ -57,67 +57,62 @@ function setGame(size){
 }
 function moveTiles(tiles, size, dirc){//up:0, down: 1, left: 2, right: 3
     function logic1(arrSet){
-        let res = arrSet.slice();
-
         for(let k=0; k<size; k++){
-            let item = res[k];
-            
+            let item = arrSet[k];
             for(let i=0; i<item.length; i++){
                 if (item[i] != 0){
-                    for(let j=i; j<0; j--){
+                    for(let j=i; j>0; j--){
                         if (item[j-1] == 0){
-                            item.splice(j-1,1); item.push(0);
+                            const temp = item[j-1];
+                            item[j-1] = item[j];
+                            item[j] = temp;
                         }
                         else if (item[j-1] == item[j]){
-                            item[j] += 1;
-                            item.splice(j-1,1); item.push(0);
+                            item[j] = 0; item[j-1] += 1;
                             emptyCount -= 1;
                         }
                     }
                 }
             }
-
-            res[k] = item;
         }
-
-        return res.slice();
     }
     let arrSet = [];
+    let res = [];
     switch(dirc){
         case(0):
-        for(let i=0; i<size; i++){
-            let temp =[];
-            for(let j=0; j<size; j++){temp.push(tiles[i*size+j]);}
-            arrSet.push(temp);
-        }
-        arrSet = logic1(arrSet);
-        console.log(arrSet);
+            for(let i=0; i<size; i++){
+                let temp =[];
+                for(let j=0; j<size; j++){temp.push(tiles[i*size+j]);}
+                arrSet.push(temp);
+            }
+            logic1(arrSet);
         break;
         case(1):
-        for(let i=0; i<size; i++){
-            let temp =[];
-            for(let j=size-1; j>=0; j--){temp.push(tiles[i*size+j]);}
-            arrSet.push(temp);
-        }
-        console.log(arrSet);
+            for(let i=0; i<size; i++){
+                let temp =[];
+                for(let j=size-1; j>=0; j--){temp.push(tiles[i*size+j]);}
+                arrSet.push(temp);
+            }
+            logic1(arrSet);
         break;
         case(2):
-        for(let i=0; i<size; i++){
-            let temp =[];
-            for(let j=0; j<size; j++){temp.push(tiles[i+j*size]);}
-            arrSet.push(temp);
-        }
-        console.log(arrSet);
+            for(let i=0; i<size; i++){
+                let temp =[];
+                for(let j=0; j<size; j++){temp.push(tiles[i+j*size]);}
+                arrSet.push(temp);
+            }
+            logic1(arrSet);
         break;
         case(3):
-        for(let i=0; i<size; i++){
-            let temp =[];
-            for(let j=size-1; j>=0; j--){temp.push(tiles[i+j*size]);}
-            arrSet.push(temp);
-        }
-        console.log(arrSet);
+            for(let i=0; i<size; i++){
+                let temp =[];
+                for(let j=size-1; j>=0; j--){temp.push(tiles[i+j*size]);}
+                arrSet.push(temp);
+            }
+            logic1(arrSet);
         break;   
     }
+    return res;
 }
 
 //eventListeners
@@ -127,7 +122,7 @@ function onMouseDown(event){
 }
 function onMouseUp(event){
     if (startMpos == null) return false;
-    const arrive = [event.pageX,event.pageY ];
+    const arrive = [event.pageX,event.pageY];
     const threshold = document.getElementById("board").offsetHeight/8;
     //check direction
     const xmove = startMpos[0]-arrive[0];
@@ -144,7 +139,8 @@ function onMouseUp(event){
             else direction=3;
         }
         
-        moveTiles(tileSet,boardWidth,direction);
+        tileSet = moveTiles(tileSet,boardWidth,direction);
+        generateTile(tileSet);
     }
     startMpos=null;
 }
