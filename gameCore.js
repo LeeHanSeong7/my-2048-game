@@ -86,6 +86,10 @@ function moveTiles(tiles, size, dirc){//up:0, down: 1, left: 2, right: 3
                 arrSet.push(temp);
             }
             logic1(arrSet);
+            for(let i=0; i<size; i++){
+                for(let j=0; j<size; j++)
+                    res[i+j*size]=arrSet[i][j];
+            }
         break;
         case(1):
             for(let i=0; i<size; i++){
@@ -94,6 +98,10 @@ function moveTiles(tiles, size, dirc){//up:0, down: 1, left: 2, right: 3
                 arrSet.push(temp);
             }
             logic1(arrSet);
+            for(let i=0; i<size; i++){
+                for(let j=0; j<size; j++)
+                    res[(size-i-1)+j*size]=arrSet[i][j];
+            }
         break;
         case(2):
             for(let i=0; i<size; i++){
@@ -102,6 +110,10 @@ function moveTiles(tiles, size, dirc){//up:0, down: 1, left: 2, right: 3
                 arrSet.push(temp);
             }
             logic1(arrSet);
+            for(let i=0; i<size; i++){
+                for(let j=0; j<size; j++)
+                    res[i*size+j]=arrSet[i][j];
+            }
         break;
         case(3):
             for(let i=0; i<size; i++){
@@ -110,6 +122,10 @@ function moveTiles(tiles, size, dirc){//up:0, down: 1, left: 2, right: 3
                 arrSet.push(temp);
             }
             logic1(arrSet);
+            for(let i=0; i<size; i++){
+                for(let j=0; j<size; j++)
+                    res[i*size+(size-j-1)]=arrSet[i][j];
+            }
         break;   
     }
     return res;
