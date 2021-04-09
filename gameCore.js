@@ -181,7 +181,7 @@ board.readyBoard();
 board.boardElement.addEventListener("mousedown",onMouseDown,false);
 document.getElementsByTagName("body")[0].addEventListener("mouseup",onMouseUp,false);
 //test//
-board.boardElement.addEventListener("touchstart",()=>{alert("test!")},false);
-document.getElementsByTagName("body")[0].addEventListener("touchend",()=>{alert("test!")},false);
+board.boardElement.addEventListener("touchstart",onMouseDown,false);
+document.getElementsByTagName("body")[0].addEventListener("touchend",onMouseUp,false);
   
 setGame(boardWidth);
