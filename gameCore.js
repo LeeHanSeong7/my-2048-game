@@ -57,23 +57,23 @@ function setGame(size){
 }
 function moveTiles(tiles, size, dirc){//up:0, down: 1, left: 2, right: 3
     function logic1(arrSet){
-        for(let k=0; k<size; k++){
-            let item = arrSet[k];
-            for(let i=0; i<item.length; i++){
-                if (item[i] != 0){
-                    for(let j=i; j>0; j--){
-                        if (item[j-1] == 0){
-                            const temp = item[j-1];
-                            item[j-1] = item[j];
-                            item[j] = temp;
-                        }
-                        else if (item[j-1] == item[j]){
-                            item[j] = 0; item[j-1] += 1;
-                            emptyCount += 1;
-                        }
-                    }
+        for(let k=0; k<arrSet.length; k++){
+            let temp = [];
+            arrSet[k].forEach(e=>{
+                if (e != 0) temp.push(e);
+            });
+            for(let i=0; i<temp.length; i++){
+                if (temp[i] == temp[i+1]){
+                    temp[i+1] += 1;
+                    temp.splice(i,1);
+                    emptyCount += 1;
                 }
             }
+            const leng = temp.length;
+            for(let i=0; i<size-leng; i++)
+                temp.push(0);
+            console.log(temp);
+            arrSet[k] = temp;
         }
     }
     let arrSet = [];
@@ -152,6 +152,7 @@ function onMouseUp(event){
         }
         
         tileSet = moveTiles(tileSet,boardWidth,direction);
+        //board.drawTiles(tileSet.slice(),boardWidth);
         generateTile(tileSet);
     }
     startMpos=null;
