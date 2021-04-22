@@ -248,7 +248,9 @@ board.readyBoard();
 board.boardElement.addEventListener("mousedown",onMouseDown,false);
 document.getElementsByTagName("body")[0].addEventListener("mouseup",onMouseUp,false);
 //test//
-board.boardElement.addEventListener("touchstart",onMouseDown,false);
-document.getElementsByTagName("body")[0].addEventListener("touchend",onMouseUp,false);
+// board.boardElement.addEventListener("touchstart",onMouseDown,false);
+// document.getElementsByTagName("body")[0].addEventListener("touchend",onMouseUp,false);
+window.addEventListener("touchstart",onMouseDown,false);
+window.addEventListener("touchend",onMouseUp,false);
   
 setGame(boardWidth);
