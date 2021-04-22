@@ -195,10 +195,45 @@ let restartButton = {
     },
     "text":"restart",
 };
-let backButton = {
+let upButton = {
     "onPress": ()=>{
+        let res = tileSet.slice();
+        tileSet = moveTiles(tileSet,boardWidth,0);
+        if (JSON.stringify(tileSet) != JSON.stringify(res)){
+            generateTile(tileSet);
+        }
     },
-    "text":"back",
+    "text":"up",
+};
+let downButton = {
+    "onPress": ()=>{
+        let res = tileSet.slice();
+        tileSet = moveTiles(tileSet,boardWidth,1);
+        if (JSON.stringify(tileSet) != JSON.stringify(res)){
+            generateTile(tileSet);
+        }
+    },
+    "text":"down",
+};
+let leftButton = {
+    "onPress": ()=>{
+        let res = tileSet.slice();
+        tileSet = moveTiles(tileSet,boardWidth,2);
+        if (JSON.stringify(tileSet) != JSON.stringify(res)){
+            generateTile(tileSet);
+        }
+    },
+    "text":"left",
+};
+let righttButton = {
+    "onPress": ()=>{
+        let res = tileSet.slice();
+        tileSet = moveTiles(tileSet,boardWidth,3);
+        if (JSON.stringify(tileSet) != JSON.stringify(res)){
+            generateTile(tileSet);
+        }
+    },
+    "text":"right",
 };
 
 //initialize
@@ -208,7 +243,7 @@ window.addEventListener("keydown",onKeyPressed);
 
 
 buttonSet.readyButtonSet();
-buttonSet.updateButtonSet([restartButton,backButton]);
+buttonSet.updateButtonSet([restartButton,upButton,downButton,leftButton,righttButton]);
 board.readyBoard();
 board.boardElement.addEventListener("mousedown",onMouseDown,false);
 document.getElementsByTagName("body")[0].addEventListener("mouseup",onMouseUp,false);
