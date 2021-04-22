@@ -3,16 +3,6 @@ import * as buttonSet from "./components/buttonSet.js"
 
 //const windowSize = [screen.availHeight,screen.availWidth];
 
-//config
-let restartButton = {
-    "onPress": restartOnclick,
-    "text":"restart",
-};
-let backButton = {
-    "onPress": backOnclick,
-    "text":"back",
-};
-
 //innerInfo
 const clear = 11;
 let boardWidth = 4; 
@@ -22,10 +12,6 @@ let fourRatio = 0.2;
 
 //innerFunction
 function generateTile(tiles){
-    if(emptyCount == 0){
-        onLoseEvent();
-        return false;
-    }
     let randNum = Math.random()*(emptyCount);
     for(let i=0; randNum >= 0; i++){
         if (tiles[i] == 0){
@@ -41,8 +27,10 @@ function generateTile(tiles){
             }
         }
     }
-    console.log(tiles);
-    board.drawTiles(tileSet.slice(),boardWidth);
+    board.drawTiles(tiles.slice(),boardWidth);
+    if (emptyCount == 0 && checkFail()){
+        onLoseEvent();
+    }
     return true;
 }
 function setGame(size){
@@ -72,7 +60,6 @@ function moveTiles(tiles, size, dirc){//up:0, down: 1, left: 2, right: 3
             const leng = temp.length;
             for(let i=0; i<size-leng; i++)
                 temp.push(0);
-            console.log(temp);
             arrSet[k] = temp;
         }
     }
@@ -126,6 +113,21 @@ function moveTiles(tiles, size, dirc){//up:0, down: 1, left: 2, right: 3
     }
     return res;
 }
+function checkFail(){
+    let copy = tileSet.slice();
+    let EC = emptyCount;
+    const str = JSON.stringify(tileSet);
+
+    for(let dirc = 0; dirc<=3; dirc++){
+        let temp = moveTiles(copy,boardWidth, dirc);
+        if (JSON.stringify(temp) != str){
+            emptyCount = EC;
+            return false;
+        }
+    }
+    emptyCount = EC;
+    return true;
+}
 
 //eventListeners
 let startMpos= null;
@@ -150,12 +152,33 @@ function onMouseUp(event){
             if (xmove > 0) direction=2;
             else direction=3;
         }
-        
+        let res = tileSet.slice();
         tileSet = moveTiles(tileSet,boardWidth,direction);
-        //board.drawTiles(tileSet.slice(),boardWidth);
-        generateTile(tileSet);
+        if (JSON.stringify(tileSet) != JSON.stringify(res)){
+            generateTile(tileSet);
+        }
     }
     startMpos=null;
+}
+function onKeyPressed(event){
+    let direction = null;
+    switch(event.key){
+        case("ArrowUp"): direction = 0;
+        break;
+        case("ArrowDown"): direction = 1;
+        break;
+        case("ArrowLeft"): direction = 2;
+        break;
+        case("ArrowRight"): direction = 3;
+        break;
+    }    
+    if (direction != null){
+        let res = tileSet.slice();
+        tileSet = moveTiles(tileSet,boardWidth,direction);
+        if (JSON.stringify(tileSet) != JSON.stringify(res)){
+            generateTile(tileSet);
+        }
+    }
 }
 function onResizeEvent(event){
     board.updateBoardStyle();
@@ -164,17 +187,26 @@ function onResizeEvent(event){
 function onLoseEvent(){
     alert("fail!");
 }
-function restartOnclick(){
-    setGame(boardWidth);
-}
-function backOnclick(){
-    generateTile(tileSet);
-}
+
+//config
+let restartButton = {
+    "onPress": ()=>{
+        setGame(boardWidth);
+    },
+    "text":"restart",
+};
+let backButton = {
+    "onPress": ()=>{
+    },
+    "text":"back",
+};
 
 //initialize
 window.addEventListener("resize",onResizeEvent,false);
 window.addEventListener("focus",onResizeEvent,false);
-  
+window.addEventListener("keydown",onKeyPressed);
+
+
 buttonSet.readyButtonSet();
 buttonSet.updateButtonSet([restartButton,backButton]);
 board.readyBoard();

@@ -1,7 +1,9 @@
 .temp{
     flex-wrap: wrap;
-    background-color:gray;
+    background-color: peru;
     background-color:rgba(0,0,255);
     vertical-align: middle;
     display: inline-block;
+    border: solid bisque 10px;
+
 }

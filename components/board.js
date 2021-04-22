@@ -1,7 +1,7 @@
 export let boardElement;
 //config
-const tileMargin = 0.05; //%
-
+const tileMargin = 0.01; //%
+const boradColor = "bisque";
 //
 export function updateBoardStyle(){
     let style=`
@@ -10,8 +10,10 @@ export function updateBoardStyle(){
         width:${document.getElementById("board").offsetHeight};
     `;
     boardElement.setAttribute(`style`,style);
+    const bdr_rad = 10;
     style=`
-        background-color: blue;
+        border-radius: ${bdr_rad}px;
+        background-color: ${boradColor};
         flex:1;
         max-height: ${document.getElementById("container").offsetWidth};
         width:${document.getElementById("board").offsetHeight};
@@ -32,10 +34,12 @@ export function drawTiles(tiles,size){
     while (boardElement.firstChild) {
         boardElement.removeChild(boardElement.firstChild);
     }
+    const bdr_rad = 10;
     let tileStyle=`
         width: ${(100/size)*(1-tileMargin*2)}%;
         height: ${(100/size)*(1-tileMargin*2)}%;
         margin: ${(100/size)*tileMargin}%;
+        border-radius: ${bdr_rad}px;
     `;
     tiles.forEach(tile=>{
         const element = document.createElement("div");
@@ -48,7 +52,7 @@ export function drawTiles(tiles,size){
         }
         else{
             tileStyle += `
-                background-color: gray;
+                background-color: ${boradColor};
                 `;
         }
         element.setAttribute('class', 'tile no_select');

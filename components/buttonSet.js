@@ -13,7 +13,7 @@ export function updateButtonSetStyle(){
         display: flex;
         align-item: center;
         justify-content: center;
-        background-color: orange;
+        /*background-color: orange;*/
     `;
     buttonSet.setAttribute(`style`,style);
 }
@@ -28,7 +28,7 @@ export function readyButtonSet(){
 const bdr_rad = 15;
 const tb_margin = 3;
 const defaultStyle=`
-    background-color: chartreuse;
+    background-color: peru;
     flex:1;
     max-width:100px;
 
