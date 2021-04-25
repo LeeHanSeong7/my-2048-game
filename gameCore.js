@@ -192,6 +192,7 @@ function onLoseEvent(){
 let restartButton = {
     "onPress": ()=>{
         setGame(boardWidth);
+        onResizeEvent();
     },
     "text":"restart",
 };

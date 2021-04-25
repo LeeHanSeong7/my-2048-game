@@ -2,6 +2,7 @@ export let boardElement;
 //config
 const tileMargin = 0.01; //%
 const boradColor = "bisque";
+const fontsize = 25;
 //
 export function updateBoardStyle(){
     let style=`
@@ -44,11 +45,22 @@ export function drawTiles(tiles,size){
     tiles.forEach(tile=>{
         const element = document.createElement("div");
         if(tile != 0){
+            const text = document.createElement("div");
             tileStyle += `
                 background-color: rgba(${255*((12-tile)/11)},${155*((12-tile)/11)},${0},1);
-                font-size: larger;
+                display:flex;
+                align-items: center;
                 `;
-            element.innerText=2**tile;
+            const textStyle = `
+                width:100%;
+                font-size: ${fontsize/size}vmin;
+                
+                background-color:rgba(0,0,255);
+                text-align: center;
+            `;
+            text.innerText=2**tile;
+            text.setAttribute('style', textStyle);
+            element.appendChild(text);
         }
         else{
             tileStyle += `
