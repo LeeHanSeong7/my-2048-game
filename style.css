@@ -1,15 +1,7 @@
 .temp{
-    flex-wrap: wrap;
-    background-color: peru;
-    background-color:rgba(0,0,255);
-    vertical-align:text-bottom;
-    display: inline-block;
-    border: solid bisque 10px;
-    display:flex;
-    align-items: center;
-    align-content: center;
-    font-size:100%;
-    width:100%;
-    padding: 1%;
-    max-height: 100%;
+
+    white-space: nowrap;
+    text-align: justify;
 }
+max-height: ${document.getElementById("container").offsetWidth};
+        
