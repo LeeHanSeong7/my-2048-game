@@ -44,6 +44,7 @@ function setGame(size){
         tileSet[i] = 0;
     }
     //
+    board.removeTiles();
     generateTile(tileSet);
 }
 function moveTiles(tiles, size, dirc){//up:0, down: 1, left: 2, right: 3

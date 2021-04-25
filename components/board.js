@@ -35,10 +35,13 @@ export function updateBoardStyle(){
     `;
     boardElement.setAttribute(`style`,style);
 }
-export function drawTiles(tiles,size){
+export function removeTiles(){
     while (boardElement.firstChild) {
         boardElement.removeChild(boardElement.firstChild);
     }
+}
+export function drawTiles(tiles,size){
+    removeTiles();
     const bdr_rad = 10;
     let tileStyle=`
         width: ${(100/size)*(1-tileMargin*2)}%;
