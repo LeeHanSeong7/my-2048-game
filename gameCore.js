@@ -5,7 +5,7 @@ import * as buttonSet from "./components/buttonSet.js"
 
 //innerInfo
 const clear = 11;
-let boardWidth = 4; 
+let boardWidth = 6; 
 let tileSet=[];
 let emptyCount = 0;
 let fourRatio = 0.2;
@@ -13,8 +13,10 @@ let fourRatio = 0.2;
 //innerFunction
 function generateTile(tiles){
     let randNum = Math.random()*(emptyCount);
+    let effectPos = null;
     for(let i=0; randNum >= 0; i++){
         if (tiles[i] == 0){
+            effectPos = i;
             randNum -= 1;
             if (randNum < 0){
                 let rand2 = Math.random();
@@ -31,6 +33,7 @@ function generateTile(tiles){
     if (emptyCount == 0 && checkFail()){
         onLoseEvent();
     }
+    board.effectMaker(Math.floor(effectPos/boardWidth),effectPos%boardWidth, boardWidth);
     return true;
 }
 function setGame(size){
@@ -52,6 +55,9 @@ function moveTiles(tiles, size, dirc){//up:0, down: 1, left: 2, right: 3
             });
             for(let i=0; i<temp.length; i++){
                 if (temp[i] == temp[i+1]){
+                    if(temp[i+1] == clear-1){
+                        onWinEvent();
+                    }
                     temp[i+1] += 1;
                     temp.splice(i,1);
                     emptyCount += 1;
@@ -186,6 +192,9 @@ function onResizeEvent(event){
 }
 function onLoseEvent(){
     alert("fail!");
+}
+function onWinEvent(){
+    alert("congratuation!");
 }
 
 //config

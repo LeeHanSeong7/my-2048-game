@@ -1,23 +1,10 @@
-export let boardElement;
 //config
 const tileMargin = 0.01; //%
-const boradColor = "bisque";
-//
-export function updateBoardStyle(){
-    const bdr_rad = 10;
-    let style=`
-        border-radius: ${bdr_rad}px;
-        background-color: ${boradColor};
-        flex:1;
-        max-height: ${document.getElementById("container").offsetWidth};
-        width:${document.getElementById("board").offsetHeight};
-        
-        display: flex; 
-        flex-direction: column;
-        flex-wrap: wrap;
-    `;
-    boardElement.setAttribute(`style`,style);
-}
+const boardColor = "bisque";
+const effectColor = "rgb(225, 255, 250)";
+const effectDelay = 1;
+//init
+export let boardElement;
 export function readyBoard(){
     boardElement = document.createElement("div");
     boardElement.setAttribute("id", "board");
@@ -29,6 +16,23 @@ export function readyBoard(){
     `;
     boardElement.setAttribute(`style`,style);
     updateBoardStyle();
+}
+//
+export function updateBoardStyle(){
+    const bdr_rad = 10;
+    let style=`
+        border-radius: ${bdr_rad}px;
+        background-color: ${boardColor};
+        flex:1;
+        max-height: ${document.getElementById("container").offsetWidth};
+        width:${document.getElementById("board").offsetHeight};
+        
+        display: flex; 
+        flex-direction: column;
+        flex-wrap: wrap;
+        position: relative;
+    `;
+    boardElement.setAttribute(`style`,style);
 }
 export function drawTiles(tiles,size){
     while (boardElement.firstChild) {
@@ -61,5 +65,28 @@ export function drawTiles(tiles,size){
         }
         boardElement.appendChild(element);
     });
+}
+export function effectMaker(x,y,size){
+    console.log(boardElement.offsetHeight);
+    let effectElement = document.createElement("div");
+    effectElement.setAttribute("id", "effect");
+
+    const bdr_rad = 10;
+    let tileEffect=`
+        position: absolute;
+        top: ${(100/size)*y}%;
+        left: ${(100/size)*x}%;
+        
+        width: ${(100/size)*(1-tileMargin*2)}%;
+        height: ${(100/size)*(1-tileMargin*2)}%;
+        margin: ${(100/size)*tileMargin}%;
+        border-radius: ${bdr_rad}px;
+        opacity: 0;
+
+        background-color: ${effectColor};
+        animation: fadeOut ${effectDelay}s;
+    `;
+    effectElement.setAttribute(`style`,tileEffect);
+    boardElement.appendChild(effectElement)
 }
 //

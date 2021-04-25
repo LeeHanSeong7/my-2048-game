@@ -2,6 +2,10 @@
 
     white-space: nowrap;
     text-align: justify;
+    top:0;
+    left: 0;
+    opacity: 1;
+    animation: fadein 1s;
 }
-max-height: ${document.getElementById("container").offsetWidth};
         
+animation: fadeOut 1s;
