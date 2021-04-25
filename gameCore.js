@@ -256,6 +256,7 @@ let righttButton = {
 //initialize
 window.addEventListener("resize",onResizeEvent,false);
 window.addEventListener("focus",onResizeEvent,false);
+window.addEventListener("fullscreenchange",onResizeEvent,false);
 window.addEventListener("keydown",onKeyPressed);
 
 
