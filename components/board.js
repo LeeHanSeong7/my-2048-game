@@ -2,7 +2,6 @@ export let boardElement;
 //config
 const tileMargin = 0.01; //%
 const boradColor = "bisque";
-const fontsize = 13;
 //
 export function updateBoardStyle(){
     const bdr_rad = 10;
@@ -44,32 +43,22 @@ export function drawTiles(tiles,size){
     `;
     tiles.forEach(tile=>{
         const element = document.createElement("div");
+        element.setAttribute('class', 'tile no_select');
         if(tile != 0){
-            const text = document.createElement("div");
-            tileStyle += `
+            element.setAttribute('style', tileStyle+`
                 background-color: rgba(${255*((12-tile)/11)},${155*((12-tile)/11)},${0},1);
                 display:flex;
                 align-items: center;
-                `;
-            const textStyle = `
-                width:100%;
-                background-color: blue;
-
-                font-size: ${fontsize/size}vmin;
                 
-                text-align: center;
-            `;
-            text.innerText=2**tile;
-            text.setAttribute('style', textStyle);
-            element.appendChild(text);
+                background-image: url("../source/image/number_${tile}.png");
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: contain;
+            `);
         }
         else{
-            tileStyle += `
-                background-color: ${boradColor};
-                `;
+            element.setAttribute('style', tileStyle);
         }
-        element.setAttribute('class', 'tile no_select');
-        element.setAttribute('style', tileStyle);
         boardElement.appendChild(element);
     });
 }
