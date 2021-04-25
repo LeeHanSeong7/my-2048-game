@@ -54,7 +54,9 @@ export function drawTiles(tiles,size){
                 display:flex;
                 align-items: center;
                 
-                background-image: url("../source/image/number_${tile}.png");
+                background-image: url("
+                    https://raw.githubusercontent.com/LeeHanSeong7/my-2048-game/main/source/image/number_${tile}.png
+                    ");
                 background-repeat: no-repeat;
                 background-position: center center;
                 background-size: contain;
