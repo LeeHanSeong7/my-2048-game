@@ -67,7 +67,6 @@ export function drawTiles(tiles,size){
     });
 }
 export function effectMaker(x,y,size){
-    console.log(boardElement.offsetHeight);
     let effectElement = document.createElement("div");
     effectElement.setAttribute("id", "effect");
 
