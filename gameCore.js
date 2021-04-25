@@ -5,7 +5,7 @@ import * as buttonSet from "./components/buttonSet.js"
 
 //innerInfo
 const clear = 11;
-let boardWidth = 6; 
+let boardWidth = 4; 
 let tileSet=[];
 let emptyCount = 0;
 let fourRatio = 0.2;
@@ -200,6 +200,13 @@ function onWinEvent(){
 //config
 let restartButton = {
     "onPress": ()=>{
+        while(true){
+            boardWidth = prompt("game size","2 ~ 10");
+            if(!Number.isNaN(boardWidth) || 2<=boardWidth<=10){
+                boardWidth = Math.floor(boardWidth);
+                break;
+            }
+        }
         setGame(boardWidth);
         onResizeEvent();
     },
