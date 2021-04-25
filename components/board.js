@@ -3,6 +3,7 @@ const tileMargin = 0.01; //%
 const boardColor = "bisque";
 const effectColor = "rgb(225, 255, 250)";
 const effectDelay = 1;
+const imagePath = "image/high_resol"
 //init
 export let boardElement;
 export function readyBoard(){
@@ -54,7 +55,7 @@ export function drawTiles(tiles,size){
                 display:flex;
                 align-items: center;
                 
-                background-image: url("https://raw.githubusercontent.com/LeeHanSeong7/my-2048-game/main/source/image/number_${tile}.png");
+                background-image: url("https://raw.githubusercontent.com/LeeHanSeong7/my-2048-game/main/source/${imagePath}/number_${tile}.png");
                 background-repeat: no-repeat;
                 background-position: center center;
                 background-size: contain;
