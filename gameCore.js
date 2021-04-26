@@ -187,6 +187,8 @@ function onKeyPressed(event){
         break;
         case("ArrowRight"): direction = 3;
         break;
+        case("Escape"): onRestart();
+        break;
     }    
     if (direction != null){
         let res = tileSet.slice();
@@ -209,24 +211,25 @@ function onLoseEvent(){
 function onWinEvent(){
     alert("congratuation!");
 }
+function onRestart(){
+    const size = document.getElementById("boardSize");
+    if (size.value > 10) {
+        boardWidth = 10;
+        size.value = 10;
+    }
+    else if (size.value < 2) {
+        boardWidth = 2;
+        size.value = 2;
+    }
+    else boardWidth = size.value;
+    fourRatio = document.getElementById("4ratio").value/100;
+    setGame(boardWidth);
+    onResizeEvent();
+}
 
 //config
 let restartButton = {
-    "onPress": ()=>{
-        const size = document.getElementById("boardSize");
-        if (size.value > 10) {
-            boardWidth = 10;
-            size.value = 10;
-        }
-        else if (size.value < 2) {
-            boardWidth = 2;
-            size.value = 2;
-        }
-        else boardWidth = size.value;
-        fourRatio = document.getElementById("4ratio").value/100;
-        setGame(boardWidth);
-        onResizeEvent();
-    },
+    "onPress": onRestart,
     "text":"restart",
     "color":"rgb(94, 68, 40)",
 };
