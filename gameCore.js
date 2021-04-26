@@ -286,7 +286,7 @@ buttonSet.updateButtonSet([null,leftButton,restartButton,righttButton,null],butt
 buttonSet.updateButtonSet([null,null,upButton,null,null],buttonSet3);
 
 let ratioCon = document.createElement("div");
-const ratioH = 35;
+const ratioH = 50;
 ratioCon.setAttribute('style',`
     height: ${ratioH};
     width: 100%;    
