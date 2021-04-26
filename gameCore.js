@@ -310,7 +310,7 @@ ratioCon.appendChild(contents);
 contents = document.createElement("input");
 contents.setAttribute('style',`
     flex : 0.7;
-    max-width: ${document.getElementById("board").offsetWidth};
+    max-width: 50vmin;
     min-width: ${ratioH*3};
     height:  ${ratioH*0.7};
     margin-right: 2vw;
