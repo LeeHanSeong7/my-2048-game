@@ -1,5 +1,5 @@
 //buttonset
-let buttonSetSize = 75;
+let buttonSetSize = 50;
 export function updateButtonSetStyle(target){
     let style=`
         height: ${buttonSetSize};
