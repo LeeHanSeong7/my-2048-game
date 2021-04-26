@@ -12,6 +12,14 @@
                 align-content: stretch;
                 flex-direction: column;
                 position: fixed;
+                background-color: bisque;
+            }
+            #score{
+                text-align: center;
+                color: powderblue;
+                font-weight: bold;
+                font-size: 7vh;
+                margin-bottom: 0.5vh;
             }
             #container{
                 /* background-color: blueviolet; */
@@ -20,6 +28,9 @@
                 align-items: center;
                 justify-content: center;
                 flex-direction: column-reverse;
+            }
+            .lineDeco{
+                background-color: peru;
             }
             .no_select{   
                 -ms-user-select: none; 
@@ -41,8 +52,9 @@
     
     <body>
         <!-- <h1 style="text-align: center;">2048</h1> -->
-        <h3 style="text-align: right;">knu 2016115743 이한성</h3>
+        <div id="score" class="lineDeco">SCORE</div>
         <div id="container"></div>
+        <h2 style="text-align: right;">knu 2016115743 이한성</h3>
     </body>
     </script>
     <script type="module" src="./components/board.js"></script>

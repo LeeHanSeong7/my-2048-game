@@ -5,10 +5,11 @@ import * as buttonSet from "./components/buttonSet.js"
 
 //innerInfo
 const clear = 11;
-let boardWidth = 4; 
+let boardWidth = 6; 
 let tileSet=[];
 let emptyCount = 0;
 let fourRatio = 0.2;
+const ScoreBoard = document.getElementById("score");
 
 //innerFunction
 function generateTile(tiles){
@@ -33,6 +34,7 @@ function generateTile(tiles){
     if (emptyCount == 0 && checkFail()){
         onLoseEvent();
     }
+    ScoreBoard.textContent = getScore(tileSet);
     board.effectMaker(Math.floor(effectPos/boardWidth),effectPos%boardWidth, boardWidth);
     return true;
 }
@@ -135,6 +137,13 @@ function checkFail(){
     emptyCount = EC;
     return true;
 }
+function getScore(tileSet){
+    let res = 0;
+    tileSet.forEach(e=>{
+        if (e != 0) res += 2**e;
+    });
+    return res;
+}
 
 //eventListeners
 let startMpos= null;
@@ -189,9 +198,12 @@ function onKeyPressed(event){
 }
 function onResizeEvent(event){
     board.updateBoardStyle();
-    buttonSet.updateButtonSetStyle();
+    buttonSet.updateButtonSetStyle(buttonSet1);
+    buttonSet.updateButtonSetStyle(buttonSet2);
+    buttonSet.updateButtonSetStyle(buttonSet3);
 }
 function onLoseEvent(){
+    window.blur();
     alert("fail!");
 }
 function onWinEvent(){
@@ -201,17 +213,22 @@ function onWinEvent(){
 //config
 let restartButton = {
     "onPress": ()=>{
-        while(true){
-            boardWidth = prompt("game size","2 ~ 10");
-            if(!Number.isNaN(boardWidth) || 2<=boardWidth<=10){
-                boardWidth = Math.floor(boardWidth);
-                break;
-            }
+        const size = document.getElementById("boardSize");
+        if (size.value > 10) {
+            boardWidth = 10;
+            size.value = 10;
         }
+        else if (size.value < 2) {
+            boardWidth = 2;
+            size.value = 2;
+        }
+        else boardWidth = size.value;
+        fourRatio = document.getElementById("4ratio").value/100;
         setGame(boardWidth);
         onResizeEvent();
     },
     "text":"restart",
+    "color":"rgb(94, 68, 40)",
 };
 let upButton = {
     "onPress": ()=>{
@@ -260,12 +277,80 @@ window.addEventListener("focus",onResizeEvent,false);
 window.addEventListener("fullscreenchange",onResizeEvent,false);
 window.addEventListener("keydown",onKeyPressed);
 
+let buttonSet1 = buttonSet.readyButtonSet("buttonSet1");
+let buttonSet2 = buttonSet.readyButtonSet("buttonSet2");
+let buttonSet3 = buttonSet.readyButtonSet("buttonSet3");
 
-buttonSet.readyButtonSet();
-buttonSet.updateButtonSet([restartButton,upButton,downButton,leftButton,righttButton]);
-board.readyBoard();
+buttonSet.updateButtonSet([null,null,downButton,null,null],buttonSet1);
+buttonSet.updateButtonSet([null,leftButton,restartButton,righttButton,null],buttonSet2);
+buttonSet.updateButtonSet([null,null,upButton,null,null],buttonSet3);
+
+let ratioCon = document.createElement("div");
+const ratioH = 50;
+ratioCon.setAttribute('style',`
+    height: ${ratioH};
+    width: 100%;    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+`);
+container.appendChild(ratioCon);
+let contents  = document.createElement("div");
+contents.setAttribute('style',`
+    width: auto;
+    height:  ${ratioH};
+    font-weight: bolder;
+    font-size: 1.5em;
+    color : rgb(94, 68, 40);
+`);
+contents.textContent = "4 Ratio : ";
+ratioCon.appendChild(contents);
+
+contents = document.createElement("input");
+contents.setAttribute('style',`
+    flex : 0.3;
+    max-width: 10vw;
+    min-width: ${ratioH*3};
+    height:  ${ratioH*0.7};
+    margin-right: 2vw;
+`);
+contents.setAttribute("id","4ratio");
+contents.setAttribute("type","range");
+contents.setAttribute("value","20");
+contents.setAttribute("min","0");
+contents.setAttribute("max","100");
+ratioCon.appendChild(contents);
+
+
+contents  = document.createElement("div");
+contents.setAttribute('style',`
+    width: auto;
+    height:  ${ratioH};
+    font-weight: bold;
+    font-size: 1.5em;
+    color : rgb(94, 68, 40);
+`);
+contents.textContent = "Size(2~10) : ";
+ratioCon.appendChild(contents);
+
+contents = document.createElement("input");
+contents.setAttribute('style',`
+    width: ${ratioH};
+    height:  ${ratioH*0.7};
+`);
+contents.setAttribute("id","boardSize");
+contents.setAttribute("type","number");
+contents.setAttribute("value","4");
+contents.setAttribute("min","2");
+contents.setAttribute("max","10");
+ratioCon.appendChild(contents);
+
+
+board.readyBoard("board");
 board.boardElement.addEventListener("mousedown",onMouseDown,false);
 document.getElementsByTagName("body")[0].addEventListener("mouseup",onMouseUp,false);
+
 //test//
 // board.boardElement.addEventListener("touchstart",onMouseDown,false);
 // document.getElementsByTagName("body")[0].addEventListener("touchend",onMouseUp,false);

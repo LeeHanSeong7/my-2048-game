@@ -1,14 +1,14 @@
 //config
 const tileMargin = 0.01; //%
-const boardColor = "bisque";
+const boardColor = "rgb(94, 68, 40)";
 const effectColor = "rgb(225, 255, 250)";
 const effectDelay = 1;
 const imagePath = "image/high_resol"
 //init
 export let boardElement;
-export function readyBoard(){
+export function readyBoard(id){
     boardElement = document.createElement("div");
-    boardElement.setAttribute("id", "board");
+    boardElement.setAttribute("id", id);
     container.appendChild(boardElement);
     let style=`
         flex:1;
@@ -17,6 +17,7 @@ export function readyBoard(){
     `;
     boardElement.setAttribute(`style`,style);
     updateBoardStyle();
+    return boardElement;
 }
 //
 export function updateBoardStyle(){
