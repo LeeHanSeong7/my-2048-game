@@ -5,7 +5,7 @@ import * as buttonSet from "./components/buttonSet.js"
 
 //innerInfo
 const clear = 11;
-let boardWidth = 6; 
+let boardWidth = 4; 
 let tileSet=[];
 let emptyCount = 0;
 let fourRatio = 0.2;
