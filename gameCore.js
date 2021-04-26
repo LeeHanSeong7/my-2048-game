@@ -286,7 +286,7 @@ buttonSet.updateButtonSet([null,leftButton,restartButton,righttButton,null],butt
 buttonSet.updateButtonSet([null,null,upButton,null,null],buttonSet3);
 
 let ratioCon = document.createElement("div");
-const ratioH = 50;
+const ratioH = 30;
 ratioCon.setAttribute('style',`
     height: ${ratioH};
     width: 100%;    
@@ -301,7 +301,7 @@ contents.setAttribute('style',`
     width: auto;
     height:  ${ratioH};
     font-weight: bolder;
-    font-size: 1.5em;
+    font-size: 1.0em;
     color : rgb(94, 68, 40);
 `);
 contents.textContent = "4 Ratio : ";
@@ -310,7 +310,7 @@ ratioCon.appendChild(contents);
 contents = document.createElement("input");
 contents.setAttribute('style',`
     flex : 0.7;
-    max-width: 50vmin;
+    max-width: 35vmin;
     min-width: ${ratioH*3};
     height:  ${ratioH*0.7};
     margin-right: 2vw;
@@ -328,7 +328,7 @@ contents.setAttribute('style',`
     width: auto;
     height:  ${ratioH};
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1.0em;
     color : rgb(94, 68, 40);
 `);
 contents.textContent = "Size(2~10) : ";
@@ -336,8 +336,8 @@ ratioCon.appendChild(contents);
 
 contents = document.createElement("input");
 contents.setAttribute('style',`
-    width: ${ratioH};
-    height:  ${ratioH*0.7};
+    width: ${ratioH*1.5};
+    height:  ${ratioH*1.0};
 `);
 contents.setAttribute("id","boardSize");
 contents.setAttribute("type","number");

@@ -1,5 +1,5 @@
 //buttonset
-let buttonSetSize = 65;
+let buttonSetSize = 45;
 export function updateButtonSetStyle(target){
     let style=`
         height: ${buttonSetSize};
@@ -36,7 +36,7 @@ const defaultStyle=`
     border: solid 0px;
     
     color: powderblue;
-    font-size: 1.5em;
+    font-size: 1.0em;
     text-align: center;
     line-height: ${buttonSetSize-2*tb_margin}px;
 `;
