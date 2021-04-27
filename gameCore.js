@@ -392,5 +392,6 @@ document.getElementsByTagName("body")[0].addEventListener("mouseup",onMouseUp,fa
 //test//
 board.boardElement.addEventListener("touchstart",onTouchStart,false);
 document.getElementsByTagName("body")[0].addEventListener("touchend",onTouchEnd,false);
-  
+
+alert("version v1");
 setGame(boardWidth);
