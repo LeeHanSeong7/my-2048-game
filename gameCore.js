@@ -177,11 +177,11 @@ function onMouseUp(event){
     startMpos=null;
 }
 function onTouchStart(event){
-    startMpos = [event.touches[0].clientX,event.touches[0].clientY ];
+    startMpos = [event.changedTouches[0].pageX,event.changedTouches[0].pageY ];
 }
 function onTouchEnd(event){
     if (startMpos == null) return false;
-    const arrive = [event.touches[0].clientX,event.touches[0].clientY];
+    const arrive = [event.changedTouches[0].pageX,event.changedTouches[0].pageY];
     const threshold = document.getElementById("board").offsetHeight/8;
     //check direction
     const xmove = startMpos[0]-arrive[0];
@@ -204,7 +204,6 @@ function onTouchEnd(event){
         }
     }
     startMpos=null;
-    alert(distance);
 }
 function onKeyPressed(event){
     let direction = null;
@@ -393,5 +392,5 @@ document.getElementsByTagName("body")[0].addEventListener("mouseup",onMouseUp,fa
 board.boardElement.addEventListener("touchstart",onTouchStart,false);
 document.getElementsByTagName("body")[0].addEventListener("touchend",onTouchEnd,false);
 
-alert("version v1");
+//alert("version v1");
 setGame(boardWidth);
