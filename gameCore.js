@@ -8,7 +8,7 @@ const clear = 11;
 let boardWidth = 4; 
 let tileSet=[];
 let emptyCount = 0;
-let fourRatio = 0.2;
+let fourRatio = 0.1;
 const ScoreBoard = document.getElementById("score");
 
 //innerFunction
@@ -320,7 +320,7 @@ contents.setAttribute('style',`
 `);
 contents.setAttribute("id","4ratio");
 contents.setAttribute("type","range");
-contents.setAttribute("value","20");
+contents.setAttribute("value",`${fourRatio*100}`);
 contents.setAttribute("min","0");
 contents.setAttribute("max","100");
 ratioCon.appendChild(contents);
