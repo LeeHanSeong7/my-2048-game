@@ -204,6 +204,7 @@ function onTouchEnd(event){
         }
     }
     startMpos=null;
+    alert(distance);
 }
 function onKeyPressed(event){
     let direction = null;
