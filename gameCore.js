@@ -176,6 +176,35 @@ function onMouseUp(event){
     }
     startMpos=null;
 }
+function onTouchStart(event){
+    startMpos = [event.touches[0].clientX,event.touches[0].clientY ];
+}
+function onTouchEnd(event){
+    if (startMpos == null) return false;
+    const arrive = [event.touches[0].clientX,event.touches[0].clientY];
+    const threshold = document.getElementById("board").offsetHeight/8;
+    //check direction
+    const xmove = startMpos[0]-arrive[0];
+    const ymove = startMpos[1]-arrive[1];
+    const distance = Math.sqrt(xmove**2+ymove**2);
+    let direction;//up:0, down: 1, left: 2, right: 3
+    if (distance > threshold){
+        if (Math.abs(xmove) < Math.abs(ymove)){
+            if (ymove > 0) direction=0;
+            else direction=1;
+        }
+        else{
+            if (xmove > 0) direction=2;
+            else direction=3;
+        }
+        let res = tileSet.slice();
+        tileSet = moveTiles(tileSet,boardWidth,direction);
+        if (JSON.stringify(tileSet) != JSON.stringify(res)){
+            generateTile(tileSet);
+        }
+    }
+    startMpos=null;
+}
 function onKeyPressed(event){
     let direction = null;
     switch(event.key){
@@ -360,9 +389,7 @@ board.boardElement.addEventListener("mousedown",onMouseDown,false);
 document.getElementsByTagName("body")[0].addEventListener("mouseup",onMouseUp,false);
 
 //test//
-// board.boardElement.addEventListener("touchstart",onMouseDown,false);
-// document.getElementsByTagName("body")[0].addEventListener("touchend",onMouseUp,false);
-window.addEventListener("touchstart",onMouseDown,false);
-window.addEventListener("touchend",onMouseUp,false);
+board.boardElement.addEventListener("touchstart",onTouchStart,false);
+document.getElementsByTagName("body")[0].addEventListener("touchend",onTouchEnd,false);
   
 setGame(boardWidth);
