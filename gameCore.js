@@ -285,8 +285,13 @@ let buttonSet2 = buttonSet.readyButtonSet("buttonSet2");
 let buttonSet3 = buttonSet.readyButtonSet("buttonSet3");
 
 buttonSet.updateButtonSet([null,null,downButton,null,null],buttonSet1);
-buttonSet.updateButtonSet([null,leftButton,restartButton,righttButton,null],buttonSet2);
-buttonSet.updateButtonSet([null,null,upButton,null,null],buttonSet3);
+buttonSet.updateButtonSet([null,leftButton,{
+    "onPress": null,
+    "text":"",
+    "color":"rgb(94, 68, 40)",
+},righttButton,null],buttonSet2);
+buttonSet.updateButtonSet([null,null,upButton,null,restartButton],buttonSet3);
+
 
 let ratioCon = document.createElement("div");
 const ratioH = 30;
